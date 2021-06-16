@@ -9,7 +9,11 @@
     </div>
     <div class="card-body">
 
-      @include('shared._errors')
+      {{-- {{$regEntry}} --}}
+
+      {{--@include('shared._errors', ['regEntry' => $regEntry]) --}}
+
+      {{-- {{$regEntry}}  --}}
 
       <form method="POST" action="{{ route('users.store') }}">
         {{ csrf_field() }}
@@ -19,10 +23,16 @@
           <input type="text" name="name" class="form-control" value="{{ old('name') }}">
         </div>
 
+        <input type="hidden" value="{{$regEntry = 'name'}}">
+        @include('shared._errors', ['regEntry' => $regEntry])
+
         <div class="form-group">
           <label for="email">邮箱：</label>
           <input type="text" name="email" class="form-control" value="{{ old('email') }}">
         </div>
+
+        <input type="hidden" value="{{$regEntry = 'email'}}">
+        {{-- @include('shared._errors', ['regEntry' => $regEntry]) --}}
 
         <div class="form-group">
           <label for="password">密码：</label>

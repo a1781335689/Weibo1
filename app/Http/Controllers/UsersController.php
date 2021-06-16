@@ -9,7 +9,8 @@ class UsersController extends Controller
 {
     public function create()
     {
-        return view('users.create');
+        $regEntry = '123';
+        return view('users.create', compact('regEntry'));
     }
 
     public function show(User $user)
