@@ -12,7 +12,7 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth', [            
-            'except' => ['show', 'create', 'store']
+            'except' => ['show', 'create', 'store', 'index']
         ]);
 
         // 只让未登录用户访问注册页面
@@ -21,6 +21,15 @@ class UsersController extends Controller
         ]);
     }
 
+    // 用户列表
+    // paginate 方法来指定每页生成的数据数量
+    public function index()
+    {
+        $users = User::paginate(6);
+        return view('users.index', compact('users'));
+    }
+
+    
     // 创建账号
     public function create()
     {
