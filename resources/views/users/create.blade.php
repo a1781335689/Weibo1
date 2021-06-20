@@ -38,8 +38,9 @@
           <input type="password" name="password" class="form-control" value="{{ old('password') }}">
         </div>
 
-        <input type="hidden" value="{{$regEntry = 'password'}}">
-        @include('shared._errors', ['regEntry' => $regEntry])      
+        @error('password')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror      
 
         <div class="form-group">
           <label for="password_confirmation">确认密码：</label>
