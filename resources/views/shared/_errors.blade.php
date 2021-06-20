@@ -1,3 +1,4 @@
+{{--
 @if (count($errors) > 0)
 <div class="alert alert-danger">
 
@@ -6,9 +7,11 @@
   @endforeach
 
 </div>
+--}}
+ @if ($errors->has($regEntry))
+  <div class="alert alert-danger">
+	@foreach ($errors->get($regEntry) as $message)
+		{{ $message }}
+	@endforeach
+  </div>
 @endif
-
-{{-- {{dump($errors)}}
-  @foreach($errors->all() as $error)
-  <li>{{ $error }}</li>
-  @endforeach--}}

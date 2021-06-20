@@ -1,3 +1,5 @@
+
+
 @extends('layouts.default')
 @section('title', '注册')
 
@@ -9,12 +11,6 @@
     </div>
     <div class="card-body">
 
-      {{-- {{$regEntry}} --}}
-
-      {{--@include('shared._errors', ['regEntry' => $regEntry]) --}}
-
-      {{-- {{$regEntry}}  --}}
-
       <form method="POST" action="{{ route('users.store') }}">
         {{ csrf_field() }}
 
@@ -23,21 +19,27 @@
           <input type="text" name="name" class="form-control" value="{{ old('name') }}">
         </div>
 
-        <input type="hidden" value="{{$regEntry = 'name'}}">
-        @include('shared._errors', ['regEntry' => $regEntry])
+        @error('name')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         <div class="form-group">
           <label for="email">邮箱：</label>
           <input type="text" name="email" class="form-control" value="{{ old('email') }}">
         </div>
 
-        <input type="hidden" value="{{$regEntry = 'email'}}">
-        {{-- @include('shared._errors', ['regEntry' => $regEntry]) --}}
+        @foreach ($errors->get('email') as $message)
+          <div class="alert alert-danger">{{ $message }}</div>
+        @endforeach
+
 
         <div class="form-group">
           <label for="password">密码：</label>
           <input type="password" name="password" class="form-control" value="{{ old('password') }}">
         </div>
+
+        <input type="hidden" value="{{$regEntry = 'password'}}">
+        @include('shared._errors', ['regEntry' => $regEntry])      
 
         <div class="form-group">
           <label for="password_confirmation">确认密码：</label>
