@@ -67,6 +67,7 @@ class User extends Authenticatable
         return "http://www.gravatar.com/avatar/$hash?s=$size";
     }
 
+    // 关联status模型
     public function statuses()
     {
         return $this->hasMany(Status::class);
@@ -79,7 +80,9 @@ class User extends Authenticatable
                     ->orderBy('created_at', 'desc');
     }
 
+    // 关联followers表
     // 粉丝列表
+    // 第二个参数关联表名，第三个参数 user_id 是定义在关联中的模型外键名，第四个参数 follower_id 则是要合并的模型外键名
     public function followers()
     {
         return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
